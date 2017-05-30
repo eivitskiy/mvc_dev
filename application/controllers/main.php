@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Created by PhpStorm.
+ * User: eivitskiy
+ * Date: 30.05.17
+ * Time: 11:37
+ */
+class Main extends Controller
+{
+    public function index()
+    {
+        exit('main/index');
+    }
+
+
+    public function test()
+    {
+        $this->load('model', 'test');
+        $va = $this->test_model->index();
+        $this->view->generate('test', ['va'=>$va]);
+    }
+}
