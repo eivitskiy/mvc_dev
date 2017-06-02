@@ -11,6 +11,7 @@ class Main extends Controller
     public function index()
     {
         echo '<a href="//auslogics.dev/file/file.exe">Ссылка на файл</a>';
+        echo '<a href="//vk.com">Ссылка на vk.com</a>';
         echo '<br />';
         exit('main/index');
     }
