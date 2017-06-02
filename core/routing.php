@@ -23,7 +23,7 @@ class Routing
             $methodName = 'index';
         }
 
-        $controllerFile = APPPATH . "controllers" . strtolower($controllerName) . '.php';
+        $controllerFile = APPPATH . "controllers/" . strtolower($controllerName) . '.php';
 
         if(file_exists($controllerFile)) {
             include $controllerFile;

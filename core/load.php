@@ -6,8 +6,6 @@
  * Time: 11:00
  */
 
-require_once 'config.php';
-
 require_once 'routing.php';
 
 require_once 'model.php';
