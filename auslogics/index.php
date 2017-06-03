@@ -45,4 +45,8 @@ echo "\n";
 echo 'Decrypted:' . "\n";
 var_dump($decrypted); // " string to be encrypted "
 
+$conn_string = "host=178.79.153.204 port=5432 dbname=modelme user=postgres password=#LHH&Fh0cgCG+pk";
+$dbconn = pg_connect ($conn_string);
+
+exit(0);
 ?>
