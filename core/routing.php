@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: eivitskiy
- * Date: 03.06.17
- * Time: 11:01
- */
 class Routing
 {
     static function execute()
@@ -15,7 +9,7 @@ class Routing
         if (!empty($url[1])) {
             $controllerName = $url[1];
         } else {
-            $controllerName = 'main';
+            $controllerName = 'tasks';
         }
         if (!empty($url[2])) {
             $methodName = $url[2];

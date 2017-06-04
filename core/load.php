@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: eivitskiy
- * Date: 03.06.17
- * Time: 11:00
- */
+
+session_start();
 
 require_once 'routing.php';
 

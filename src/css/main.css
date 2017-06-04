@@ -1,0 +1,30 @@
+table#task_list th {
+    cursor: pointer;
+}
+table#task_list th.sort-asc,
+table#task_list th.sort-desc {
+    position: relative;
+    padding-left: 30px;
+}
+th.sort-asc:after {
+    transform: translate(0, -50%);
+    transform-origin: left top;
+    font-family: 'Glyphicons Halflings';
+    content: "\e155";
+    top: 50%;
+    left: 10px;
+    font-size: 12px;
+    position:absolute;
+    opacity: 0.5;
+}
+th.sort-desc:after {
+    transform: translate(0, -50%);
+    transform-origin: left top;
+    font-family: 'Glyphicons Halflings';
+    content: "\e156";
+    top: 50%;
+    left: 10px;
+    font-size: 12px;
+    position:absolute;
+    opacity: 0.5;
+}
