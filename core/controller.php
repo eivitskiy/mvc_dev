@@ -15,6 +15,9 @@ class Controller
             case 'model':
                 $this->load_model($name);
                 break;
+            case 'view':
+                $this->load_view($name);
+                break;
             case 'library':
                 $this->load_library($name);
                 break;
@@ -27,6 +30,13 @@ class Controller
         $modelFile = $_SERVER['DOCUMENT_ROOT'] . "/application/models/" . strtolower($modelName) . '.php';
         include $modelFile;
         $this->$modelName = new $modelName;
+    }
+
+    private function load_view($name)
+    {
+        $viewName = $name;
+        $viewFile = $_SERVER['DOCUMENT_ROOT'] . "/application/views/" . strtolower($viewName) . '.php';
+        include $viewFile;
     }
 
     private function load_library($name)

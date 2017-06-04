@@ -2,7 +2,7 @@
 
 class Users_model extends Model
 {
-    private $table = 'users';
+    protected $table = 'users';
 
     public function getByUsername($username)
     {

@@ -32,16 +32,13 @@ class Image
             $this->resizing();
         }
 
-        do {
-            $this->filename = substr(md5(microtime()),0,32);
-            $fullname = $this->dir . $this->filename . $this->ext;
-        } while(!file_exists($fullname));
-
+        $this->filename = substr(md5(microtime()),0,32);
+        $fullname = $this->dir . $this->filename . $this->ext;
 
         copy($this->file, $fullname);
         unlink($this->file);
 
-        return $fullname;
+        return 'upload/' . $this->filename . $this->ext;
     }
 
     private function resizing()

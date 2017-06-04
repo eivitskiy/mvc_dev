@@ -1,5 +1,6 @@
 table#task_list th {
     cursor: pointer;
+    vertical-align: top;
 }
 table#task_list th.sort-asc,
 table#task_list th.sort-desc {
@@ -27,4 +28,8 @@ th.sort-desc:after {
     font-size: 12px;
     position:absolute;
     opacity: 0.5;
+}
+td > img {
+    max-width: 80px;
+    max-height: 60px;
 }

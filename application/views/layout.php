@@ -37,6 +37,8 @@
                 <ul class="nav navbar-nav">
                     <? if(!isset($_SESSION['auth']) || !$_SESSION['auth']): ?>
                     <li><a href="auth">Authorization</a></li>
+                    <? else: ?>
+                    <li><a href="auth/logout">Logout</a></li>
                     <? endif ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -74,7 +76,7 @@
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input type="text" class="form-control" required="required" name="username" pattern="[A-Za-z]{4,}">
+                                <input type="text" class="form-control" required="required" name="username" id="username" pattern="[A-Za-z]{4,}">
                             </div>
                             <span class="glyphicon form-control-feedback"></span>
                         </div>
@@ -84,7 +86,7 @@
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input type="email" class="form-control" required="required" name="email">
+                                <input type="email" class="form-control" required="required" name="email" id="email">
                             </div>
                             <span class="glyphicon form-control-feedback"></span>
                         </div>
@@ -94,7 +96,7 @@
                         <div class="col-xs-8">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
-                                <textarea class="form-control" required="required" name="text" rows="5"></textarea>
+                                <textarea class="form-control" required="required" name="text" id="text" rows="5"></textarea>
                             </div>
                             <span class="glyphicon form-control-feedback"></span>
                         </div>

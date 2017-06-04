@@ -10,4 +10,14 @@ class Model
     {
         $this->db = new DB();
     }
+
+    public function getAll()
+    {
+        return $this->db->select('*', $this->table, []);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->db->update($id, $data, $this->table);
+    }
 }

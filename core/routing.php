@@ -6,6 +6,10 @@ class Routing
     {
         $url = explode('/', $_SERVER['REQUEST_URI']);
 
+        if(preg_match('/\?/', $url[1])) {
+            $url[1] = '';
+        }
+
         if (!empty($url[1])) {
             $controllerName = $url[1];
         } else {

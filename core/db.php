@@ -17,7 +17,7 @@ class DB {
     private function result($result)
     {
         if ( !$result ) {
-            return mysqli_error();
+            return mysqli_error($this->connect);
         } else {
             $data = [];
             while ($row = mysqli_fetch_assoc($result)) {
@@ -27,26 +27,57 @@ class DB {
         }
     }
 
-    public function select($fields, $table, array $where)
+    public function select($fields, $table, array $where, $order = "'id'", $direction = "ASC", $limit = null, $offset = 0)
     {
-        if($fields = '*') {
+        if($fields == '*') {
             $select = '*';
         } else {
             $select = implode(', ', $fields);
         }
 
-        $where = implode(' AND ', $where);
+        if(count($where) > 0) {
+            $where_string = 'WHERE ' . implode(' AND ', $where);
+        } else {
+            $where_string = '';
+        }
 
-        $query = "SELECT $select FROM $table WHERE $where";
+        if(is_numeric($limit)) {
+            $limit_string = "LIMIT $limit OFFSET $offset";
+        } else {
+            $limit_string = '';
+        }
+
+        $query = "
+          SELECT
+            $select
+          FROM $table
+          $where_string
+          ORDER BY $order $direction
+          $limit_string
+        ";
 
         return $this->result(mysqli_query($this->connect, $query));
     }
 
-    public function insert($data, $table)
+    public function insert($table, $data)
     {
+        foreach($data as $k => $v) {
+            $data[$k] = "'$v'";
+        }
         $fields = implode(', ', array_keys($data));
         $values = implode( ', ', $data);
         $query = "INSERT INTO $table ($fields) VALUES ($values)";
+        return mysqli_query($this->connect, $query);
+    }
+
+    public function update($id, $data, $table)
+    {
+        $data_arr = '';
+        foreach($data as $k => $v) {
+            $data_arr[] = "$k = '$v'";
+        }
+        $data_string = implode(', ', $data_arr);
+        $query = "UPDATE $table SET $data_string WHERE id = $id";
         return mysqli_query($this->connect, $query);
     }
 

@@ -34,12 +34,12 @@ $(document).ready(function() {
                     if (response.status) {
                         alert('Задача успешно добавлена');
                         $("#AddNewTaskModal").modal('hide');
-
+                        location.reload();
                     } else {
                         alert('Произошли ошибки');
                     }
                 },
-                error: function(response) {
+                error: function() {
                     alert('Произошли ошибки');
                 }
             });
@@ -47,20 +47,33 @@ $(document).ready(function() {
     });
 
     $('table#task_list th').click(function () {
-        if ($(this).hasClass('sort')) {
-            if ($(this).hasClass('sort-asc')) {
-                $(this).removeClass('sort-asc');
-                $(this).addClass('sort-desc');
-            } else {
-                $(this).removeClass('sort-desc');
-                $(this).addClass('sort-asc');
-            }
-        } else {
-            $(this).addClass('sort sort-asc');
+        var direction = 'asc';
+        if($(this).hasClass('sort-asc')) {
+            direction = 'desc';
         }
+        document.location.href =  '?order='+$(this).attr('data-name')+'&direction='+direction;
+    });
 
-        $('table#task_list th').not(this).removeClass('sort');
-        $('table#task_list th').not(this).removeClass('sort-asc');
-        $('table#task_list th').not(this).removeClass('sort-desc');
+
+    $('select.task-status').change(function(){
+        $.ajax({
+            method: 'post',
+            url: 'ajax/update_task_status',
+            data: {
+                status: $(this).val(),
+                id: $(this).attr('data-id')
+            },
+            success: function(response) {
+                if (response.status) {
+                    alert('Задача успешно обновлена');
+                    location.reload();
+                } else {
+                    alert('Произошли ошибки');
+                }
+            },
+            error: function() {
+                alert('Произошли ошибки');
+            }
+        });
     });
 });

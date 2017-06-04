@@ -2,11 +2,15 @@
 
 class Tasks_model extends Model
 {
-    private $table = 'tasks';
+    protected $table = 'tasks';
 
     public function insert($data)
     {
-        $this->db->insert($this->table, $data);
-        return true;
+        return $this->db->insert($this->table, $data);
+    }
+
+    public function get($order, $direction, $limit, $offset)
+    {
+        return $this->db->select('*', $this->table, [], $order, $direction, $limit, $offset);
     }
 }

@@ -33,4 +33,11 @@ class Auth extends Controller
             exit('не подходит');
         }
     }
+
+    public function logout()
+    {
+        unset($_SESSION['userdata']);
+        unset($_SESSION['auth']);
+        header('Location: /');
+    }
 }
