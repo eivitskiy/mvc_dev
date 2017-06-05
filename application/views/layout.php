@@ -110,13 +110,43 @@
                     </div>
                 </form>
             </div>
-            <!-- Нижняя часть модального окна -->
             <div class="modal-footer">
+                <button type="button" class="btn btn-info" id="add_task_preview">Предварительный просмотр</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 <button id="add_task_save" type="button" class="btn btn-primary">Добавить</button>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="PreviewNewTaskModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>E-mail</th>
+                        <th>Текст&nbsp;задачи</th>
+                        <th>Картинки</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td id="preview_username"></td>
+                        <td id="preview_email"></td>
+                        <td id="preview_text"></td>
+                        <td id="preview_images"></td>
+                        <td id="preview_status"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

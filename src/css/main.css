@@ -33,3 +33,7 @@ td > img {
     max-width: 80px;
     max-height: 60px;
 }
+#preview_content {
+    /*display: inline-block;*/
+    min-height: 30px;
+}
