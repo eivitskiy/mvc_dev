@@ -6,6 +6,7 @@ class Image
     private $dir;
     private $filename;
     private $ext;
+    private $size;
     private $max_width = 320;
     private $max_height = 240;
     private $allowed_types = [
@@ -26,9 +27,9 @@ class Image
         $this->dir = $_SERVER['DOCUMENT_ROOT'] . '/upload/';
         $this->ext = '.' . end(explode(".", $file['name']));
 
-        $size = getimagesize($this->file);
+        $this->size = getimagesize($this->file);
 
-        if($size[0] > $this->max_width || $size[1] > $this->max_height) {
+        if($this->size[0] > $this->max_width || $this->size[1] > $this->max_height) {
             $this->resizing();
         }
 
@@ -45,7 +46,23 @@ class Image
     {
         $this->setType()->openImage();
 
-        $img = imagecreatetruecolor($this->max_width,$this->max_height);
+        $coefficient = $this->size[0]/$this->size[1];
+
+        $width = $this->max_width;
+        $height = $this->max_height;
+
+        if ($this->max_width/$this->max_height > $coefficient) {
+            $width = $this->max_height*$coefficient;
+        } else {
+            $height = $this->max_width/$coefficient;
+        }
+
+        $x = $this->max_width * 100 / $this->size[0];
+        $y = $this->max_height * 100 / $this->size[1];
+
+        $coefficient = ($x > $y ? $x : $y);
+
+        $img = imagecreatetruecolor($width,$height);
         imagecopyresampled(
             $img,
             $this->image,
@@ -53,8 +70,8 @@ class Image
             0,
             0,
             0,
-            $this->max_width,
-            $this->max_height,
+            $width,
+            $height,
             imagesx($this->image),
             imagesy($this->image)
         );
