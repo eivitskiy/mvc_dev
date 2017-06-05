@@ -1,3 +1,5 @@
+var dataArray = [];
+
 $(document).ready(function() {
     $('#add_task_save').click(function () {
         var formValid = true;
@@ -57,19 +59,9 @@ $(document).ready(function() {
     });
     $('input#images').change(function() {
         $('#preview_images').html('');
-        var input = $(this)[0];
-        if ( input.files && input.files[0] ) {
-            var files = input.files;
-            $.each(files, function(k,v){
-                if( v.type.match('image.*')) {
-                    var reader = new FileReader();
-                    //reader.onload = function(e) { $('#td#preview_images').attr('src', e.target.result); }
-                    reader.onload = function(e) { $('td#preview_images').append('<img src="' + e.target.result + ' alt="">'); }
-                    reader.readAsDataURL(v);
-                    console.log('asdf');
-                }
-            })
-        }
+
+        var files = $(this)[0].files;
+        loadInView(files);
     });
 
     $('table#task_list th').click(function () {
@@ -79,7 +71,6 @@ $(document).ready(function() {
         }
         document.location.href =  '?order='+$(this).attr('data-name')+'&direction='+direction;
     });
-
 
     $('select.task-status').change(function(){
         $.ajax({
@@ -102,4 +93,40 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('table#task_list img').click(function(){
+        $('img#preview_image').attr('src', $(this).attr('src'));
+        $('#PreviewImageModal').modal('show');
+    });
 });
+
+function loadInView(files) {
+    $.each(files, function(index, file) {
+            var fileReader = new FileReader();
+            fileReader.onload = (function(file) {
+
+                return function(e) {
+                    // Помещаем URI изображения в массив
+                    dataArray.push({name : file.name, value : this.result});
+                    addImage((dataArray.length-1));
+                };
+
+            })(files[index]);
+            fileReader.readAsDataURL(file);
+    });
+    return false;
+}
+
+function addImage(ind) {
+    // Если индекс отрицательный значит выводим весь массив изображений
+    if (ind < 0 ) {
+        start = 0; end = dataArray.length;
+    } else {
+        // иначе только определенное изображение
+        start = ind; end = ind+1;
+    }
+    for (i = start; i < end; i++) {
+        $('td#preview_images').append('<img src="'+dataArray[i].value+'" />&nbsp;');
+    }
+    return false;
+}
