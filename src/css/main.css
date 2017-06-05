@@ -40,3 +40,7 @@ td > img {
 table#task_list img {
     cursor: pointer;
 }
+
+div#PreviewImageModal > div.modal-sm > div.modal-content {
+    width: 380px;
+}

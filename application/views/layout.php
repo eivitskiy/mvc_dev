@@ -150,7 +150,7 @@
 <div class="modal fade" id="PreviewImageModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <button type="button" class="close" data-dismiss="modal">×</button>
                 <img src="" id="preview_image"/>
             </div>
