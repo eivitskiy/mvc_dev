@@ -1,6 +1,14 @@
 <?php
-    $url = $_SERVER['REQUEST_URI'];
-    $sign = (preg_match('/\?/', $url) ? '&' : '?');
+    $url = '';
+    $sign = '?';
+    if(isset($_GET['order'])) {
+        $url .= $sign.'order='.$_GET['order'];
+        $sign = '&';
+    }
+    if(isset($_GET['direction'])) {
+        $url .= $sign.'direction='.$_GET['direction'];
+        $sign = '&';
+    }
 
     $current = (isset($_GET['page']) ? $_GET['page'] : 1);
     $min = ($current > 3 ? ($current-3) : 1);
